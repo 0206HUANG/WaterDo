@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "13279865396",
+    "project_id": "waterdo-6c5b5",
+    "storage_bucket": "waterdo-6c5b5.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:13279865396:android:c48814d6a02af89c7b3861",
+        "android_client_info": {
+          "package_name": "com.example.waterdo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "13279865396-9ar54488oqf1ojmqje6lqtmrp9v0tiq8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwcHGn5qvigLSx6bK-2PMiwDrDtR8bBsI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "13279865396-9ar54488oqf1ojmqje6lqtmrp9v0tiq8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "13279865396-q4dcn28oe6f0hhlk4u1lhgcncvrhgp3m.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.waterdo"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:13279865396:android:3f73f72945c513c67b3861",
+        "android_client_info": {
+          "package_name": "com.yourcompany.waterdo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "13279865396-9ar54488oqf1ojmqje6lqtmrp9v0tiq8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwcHGn5qvigLSx6bK-2PMiwDrDtR8bBsI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "13279865396-9ar54488oqf1ojmqje6lqtmrp9v0tiq8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "13279865396-q4dcn28oe6f0hhlk4u1lhgcncvrhgp3m.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.waterdo"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
