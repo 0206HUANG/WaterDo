@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:uuid/uuid.dart';
 import 'firebase_options.dart';
 import 'models/task.dart';
+import 'db/database_helper.dart';
 import 'providers/task_provider.dart';
 import 'providers/auth_provider.dart';
 import 'ui/screens/home_screen.dart';
@@ -15,7 +16,14 @@ Future<void> main() async {
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  // 初始化 Hive
+  // SQLite Demo - Test CRUD operations with Tasks (only for mobile/desktop platforms)
+  try {
+    await _testSQLiteOperations();
+  } catch (e) {
+    print('SQLite operations failed (likely on web platform): $e');
+  }
+
+  // Initialize Hive
   await Hive.initFlutter();
   Hive.registerAdapter(TaskAdapter());
   final taskBox = await Hive.openBox<Task>('tasks');
@@ -85,4 +93,59 @@ class WaterDoApp extends StatelessWidget {
       ),
     );
   }
+}
+
+/// Test SQLite CRUD operations with Tasks
+Future<void> _testSQLiteOperations() async {
+  print('Starting SQLite Task Demo...');
+  
+  final db = DatabaseHelper.instance;
+
+  // 1) Insert
+  var firstTask = Task('Complete project documentation');
+  await db.insertTask(firstTask);
+  print('Inserted: $firstTask');
+
+  // 2) Query and print all tasks
+  var tasks = await db.getAllTasks();
+  print('All tasks after insert: $tasks');
+
+  // 3) Update
+  var updatedTask = Task(
+    'Complete project documentation and testing',
+    id: firstTask.id,
+    done: false,
+    schedule: firstTask.schedule,
+    dx: firstTask.dx,
+    dy: firstTask.dy,
+  );
+  await db.updateTask(updatedTask);
+  tasks = await db.getAllTasks();
+  print('All tasks after update: $tasks');
+
+  // 4) Insert another task
+  var secondTask = Task('Review code', schedule: DateTime.now().add(const Duration(days: 1)));
+  await db.insertTask(secondTask);
+  tasks = await db.getAllTasks();
+  print('All tasks after adding second task: $tasks');
+
+  // 5) Mark first task as completed
+  var completedTask = Task(
+    updatedTask.title,
+    id: updatedTask.id,
+    done: true,
+    schedule: updatedTask.schedule,
+    dx: updatedTask.dx,
+    dy: updatedTask.dy,
+  );
+  await db.updateTask(completedTask);
+  tasks = await db.getAllTasks();
+  print('All tasks after marking first as completed: $tasks');
+
+  // 6) Delete the second task
+  await db.deleteTask(secondTask.id);
+  tasks = await db.getAllTasks();
+  print('All tasks after deleting second task: $tasks');
+
+  print('SQLite Task Demo completed!');
 }

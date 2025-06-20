@@ -6,6 +6,7 @@ import '../../models/task.dart';
 import '../../providers/task_provider.dart';
 import '../widgets/bubble.dart';
 import '../widgets/add_task_sheet.dart';
+import 'sqlite_demo_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -41,8 +42,8 @@ class _HomeScreenState extends State<HomeScreen>
     final allTasks = taskProvider.allTasks;
 
     // Create separate mutable copies of the task lists to avoid issues
-    final activeTasks = [...allTasks.where((task) => !task.done).toList()];
-    final completedTasks = [...allTasks.where((task) => task.done).toList()];
+    final activeTasks = [...allTasks.where((task) => !task.done)];
+    final completedTasks = [...allTasks.where((task) => task.done)];
 
     final colorScheme = Theme.of(context).colorScheme;
 
@@ -58,6 +59,18 @@ class _HomeScreenState extends State<HomeScreen>
           style: TextStyle(fontWeight: FontWeight.w700, fontSize: 24),
         ),
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.storage),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const SQLiteDemoScreen()),
+              );
+            },
+            tooltip: 'SQLite Task Demo',
+          ),
+        ],
         bottom: TabBar(
           controller: _tabController,
           tabs: const [Tab(text: 'Active'), Tab(text: 'Completed')],

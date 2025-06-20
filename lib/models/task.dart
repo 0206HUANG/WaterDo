@@ -39,4 +39,35 @@ class Task extends HiveObject {
 
   @override
   int get hashCode => id.hashCode;
+
+  // Convert Task to Map for SQLite storage
+  Map<String, Object?> toMap() {
+    return {
+      'id': id,
+      'title': title,
+      'done': done ? 1 : 0,
+      'schedule_date': schedule?.toIso8601String(),
+      'dx': dx,
+      'dy': dy,
+    };
+  }
+
+  // Create Task from Map (for SQLite)
+  factory Task.fromMap(Map<String, dynamic> map) {
+    return Task(
+      map['title'] as String,
+      id: map['id'] as String,
+      done: (map['done'] as int) == 1,
+      schedule: map['schedule_date'] != null 
+          ? DateTime.parse(map['schedule_date'] as String)
+          : null,
+      dx: map['dx'] as double?,
+      dy: map['dy'] as double?,
+    );
+  }
+
+  @override
+  String toString() {
+    return 'Task{id: $id, title: $title, done: $done, schedule: $schedule}';
+  }
 }

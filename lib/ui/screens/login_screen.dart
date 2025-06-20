@@ -18,7 +18,8 @@ class _LoginScreenState extends State<LoginScreen> {
     try {
       final credential = await context.read<AuthProvider>().signInWithGoogle();
       if (credential != null && mounted) {
-        Navigator.pushReplacementNamed(context, '/home');
+        // 登录成功后，AuthProvider会自动处理状态更新，不需要手动导航
+        // 因为main.dart中的Consumer<AuthProvider>会自动重建界面
       } else if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Login failed, please try again')),

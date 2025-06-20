@@ -101,7 +101,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
             end: Alignment.bottomCenter,
             colors: [
               colorScheme.primary.withOpacity(0.3),
-              colorScheme.background,
+              colorScheme.surface,
             ],
           ),
         ),

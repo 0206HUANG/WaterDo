@@ -11,6 +11,9 @@ class AuthProvider with ChangeNotifier {
   bool get isAuthenticated => _user != null;
 
   AuthProvider() {
+    // 初始化时获取当前用户状态
+    _user = _auth.currentUser;
+    
     _auth.authStateChanges().listen((user) {
       _user = user;
       notifyListeners();

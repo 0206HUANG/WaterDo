@@ -35,7 +35,7 @@ class _BubbleState extends State<Bubble> with SingleTickerProviderStateMixin {
     }
 
     // Add a listener for the animation status
-    void _handleAnimationStatusChange(AnimationStatus status) {
+    void handleAnimationStatusChange(AnimationStatus status) {
       if (status == AnimationStatus.completed) {
         // Only toggle the task when animation is completely done
         // and ensure we only do it once
@@ -53,12 +53,12 @@ class _BubbleState extends State<Bubble> with SingleTickerProviderStateMixin {
           });
         }
         // Remove the listener to avoid memory leaks
-        _controller.removeStatusListener(_handleAnimationStatusChange);
+        _controller.removeStatusListener(handleAnimationStatusChange);
       }
     }
 
     // Add the status listener
-    _controller.addStatusListener(_handleAnimationStatusChange);
+    _controller.addStatusListener(handleAnimationStatusChange);
 
     // Start the animation
     await _controller.forward();
